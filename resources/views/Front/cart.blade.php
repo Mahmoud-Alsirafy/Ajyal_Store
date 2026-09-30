@@ -27,19 +27,19 @@
                     <div class="row">
                         <div class="col-lg-1 col-md-1 col-12"></div>
                         <div class="col-lg-4 col-md-3 col-12">
-                            <p>Product Name</p>
+                            <p>{{ __('Product Name') }}</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Quantity</p>
+                            <p>{{ __('Quantity') }}</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Subtotal</p>
+                            <p>{{ __('Subtotal') }}</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Price</p>
+                            <p>{{ __('Price') }}</p>
                         </div>
                         <div class="col-lg-1 col-md-2 col-12">
-                            <p>Remove</p>
+                            <p>{{ __('Delete') }}</p>
                         </div>
                     </div>
                 </div>
@@ -92,9 +92,9 @@
                                 <div class="left">
                                     <div class="coupon">
                                         <form action="#" target="_blank">
-                                            <input name="Coupon" placeholder="Enter Your Coupon" />
+                                            <input name="Coupon" placeholder="{{ __('Enter Your Coupon') }}" />
                                             <div class="button">
-                                                <button class="btn">Apply Coupon</button>
+                                                <button class="btn">{{ __('Apply Coupon') }}</button>
                                             </div>
                                         </form>
                                     </div>
@@ -103,16 +103,15 @@
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart
-                                            Subtotal<span>{{ App\Helpers\Currency::format($cart->total()) }}</span>
+                                        <li>{{ __('Cart Subtotal') }}<span>{{ App\Helpers\Currency::format($cart->total()) }}</span>
                                         </li>
-                                        <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$29.00</span></li>
-                                        <li class="last">You Pay<span>$2531.00</span></li>
+                                        <li>{{ __('Shipping') }}<span>{{ __('Free') }}</span></li>
+                                        <li>{{ __('You Save') }}<span>$29.00</span></li>
+                                        <li class="last">{{ __('You Pay') }}<span>$2531.00</span></li>
                                     </ul>
                                     <div class="button">
-                                        <a href="{{ route('checkout') }}" class="btn">Checkout</a>
-                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
+                                        <a href="{{ route('checkout') }}" class="btn">{{ __('Checkout') }}</a>
+                                        <a href="{{ route('home') }}" class="btn btn-alt">{{ __('Continue Shopping') }}</a>
                                     </div>
                                 </div>
                             </div>

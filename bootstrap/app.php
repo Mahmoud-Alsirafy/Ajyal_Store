@@ -19,6 +19,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'update_active' => \App\Http\Middleware\UpdateUserLastActive::class,
             'mark_read' => \App\Http\Middleware\MarkNotificationAsRead::class, // this one
             'money' => App\Helpers\Currency::class,
+            'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+            'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+            'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+            'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+            'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
         ]);
         $middleware->validateCsrfTokens(except: [
             // '/webhook/callback',

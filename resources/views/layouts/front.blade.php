@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="">
 <!-- Mirrored from demo.graygrids.com/themes/shopgrids/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Dec 2022 23:35:58 GMT -->
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Login - ShopGrids Bootstrap 5 eCommerce HTML Template.</title>
+    <title>{{ config('app.name', 'Ajyal Store') }}</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets') }}/images/favicon.svg" />
@@ -77,9 +77,9 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                                <li><a href="{{ route('home') }}">Home</a></li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                                <li><a href="#">{{ __('About Us') }}</a></li>
+                                <li><a href="#">{{ __('Contact Us') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -93,8 +93,7 @@
                                 <ul class="user-login">
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout').submit()">Sign
-                                            Out</a>
+                                            onclick="event.preventDefault(); document.getElementById('logout').submit()">{{ __('Sign Out') }}</a>
                                     </li>
                                     <form action="{{ route('logout') }}" id="logout" style="display:none;"
                                         method="post">@csrf</form>
@@ -102,14 +101,14 @@
                             @else
                                 <div class="user">
                                     <i class="lni lni-user"></i>
-                                    Hello
+                                    {{ __('Hello') }}
                                 </div>
                                 <ul class="user-login">
                                     <li>
-                                        <a href="{{ route('login') }}">Sign In</a>
+                                        <a href="{{ route('login') }}">{{ __('Sign In') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register') }}">Register</a>
+                                        <a href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
                                 </ul>
                             @endauth
@@ -143,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="search-input">
-                                    <input type="text" placeholder="Search" />
+                                    <input type="text" placeholder="{{ __('Search') }}..." />
                                 </div>
                                 <div class="search-btn">
                                     <button><i class="lni lni-search-alt"></i></button>
@@ -156,7 +155,7 @@
                             <div class="nav-hotline">
                                 <i class="lni lni-phone"></i>
                                 <h3>
-                                    Hotline:
+                                    {{ __('Hotline') }}:
                                     <span>(+100) 123 456 7890</span>
                                 </h3>
                             </div>
@@ -180,7 +179,7 @@
                 <div class="col-lg-8 col-md-6 col-12">
                     <div class="nav-inner">
                         <div class="mega-category-menu">
-                            <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
+                            <span class="cat-button"><i class="lni lni-menu"></i>{{ __('All Categories') }}</span>
                             <ul class="sub-category">
                                 <li>
                                     <a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>

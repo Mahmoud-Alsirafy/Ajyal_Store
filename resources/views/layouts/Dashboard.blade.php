@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="">
 <!--begin::Head-->
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE v4 | Dashboard</title>
+    <title>{{ config('app.name') }} | {{ __('dashboard.dashboard') }}</title>
 
     <!--begin::Accessibility Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -14,7 +14,7 @@
     <!--end::Accessibility Meta Tags-->
 
     <!--begin::Primary Meta Tags-->
-    <meta name="title" content="AdminLTE v4 | Dashboard" />
+    <meta name="title" content="{{ config('app.name') }} | {{ __('dashboard.dashboard') }}" />
     <meta name="author" content="ColorlibHQ" />
     <meta name="description"
         content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS. Fully accessible with WCAG 2.1 AA compliance." />
@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
         integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous" media="print"
         onload="this.media = 'all'" />
+    {{-- @if (LaravelLocalization::getCurrentLocale() == 'ar')
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" />
+    @endif --}}
     <!--end::Fonts-->
 
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -45,7 +48,11 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
+    {{-- @if (LaravelLocalization::getCurrentLocale() == 'ar')
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/adminlte.rtl.css" />
+    @else --}}
     <link rel="stylesheet" href="{{ asset('assets') }}/css/adminlte.css" />
+    {{-- @endif --}}
     <!--end::Required Plugin(AdminLTE)-->
 
     <!-- apexcharts -->
@@ -58,6 +65,23 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
+{{-- @php $isAr = LaravelLocalization::getCurrentLocale() == 'ar'; @endphp
+@if ($isAr)
+<style>
+    * { font-family: 'Cairo', sans-serif !important; }
+    .sidebar-menu .nav-link p { text-align: right; }
+    .app-sidebar { right: 0; left: auto; }
+    .app-main { margin-right: 250px; margin-left: 0; }
+    @media (max-width: 992px) { .app-main { margin-right: 0; } }
+    .ms-auto { margin-right: auto !important; margin-left: 0 !important; }
+    .float-sm-end { float: right !important; }
+    .breadcrumb-item + .breadcrumb-item::before { float: right; padding-right: 0; padding-left: 0.5rem; }
+    .dropdown-menu-end { --bs-position: start; }
+    .me-1 { margin-left: 0.25rem !important; margin-right: 0 !important; }
+    .me-2 { margin-left: 0.5rem !important; margin-right: 0 !important; }
+    .me-3 { margin-left: 1rem !important; margin-right: 0 !important; }
+</style>
+@endif --}}
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
@@ -74,16 +98,17 @@
                         </a>
                     </li>
                     <li class="nav-item d-none d-md-block">
-                        <a href="#" class="nav-link">Home</a>
+                        <a href="{{ route('dashboard') }}" class="nav-link">{{ __('dashboard.home') }}</a>
                     </li>
                     <li class="nav-item d-none d-md-block">
-                        <a href="#" class="nav-link">Contact</a>
+                        <a href="#" class="nav-link">{{ __('dashboard.contact') }}</a>
                     </li>
                 </ul>
                 <!--end::Start Navbar Links-->
 
                 <!--begin::End Navbar Links-->
                 <ul class="navbar-nav ms-auto">
+
                     <!--begin::Navbar Search-->
                     <li class="nav-item">
                         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -167,7 +192,8 @@
                                 <!--end::Message-->
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                            <a href="#" class="dropdown-item dropdown-footer">{{ __('dashboard.view_all') }}
+                                {{ __('dashboard.messages') }}</a>
                         </div>
                     </li>
                     <!--end::Messages Dropdown Menu-->
@@ -199,8 +225,8 @@
                                 <img src="{{ asset('assets') }}/assets/img/user2-160x160.jpg"
                                     class="rounded-circle shadow" alt="User Image" />
                                 <p>
-                                    {{ Auth::user()->name }} - Web Developer
-                                    <small>Member since Nov. 2023</small>
+                                    {{ Auth::user()->name }}
+                                    <small>{{ __('dashboard.member_since') }} Nov. 2023</small>
                                 </p>
                             </li>
                             <!--end::User Image-->
@@ -209,13 +235,13 @@
                                 <!--begin::Row-->
                                 <div class="row">
                                     <div class="col-4 text-center">
-                                        <a href="#">Followers</a>
+                                        <a href="#">{{ __('dashboard.followers') }}</a>
                                     </div>
                                     <div class="col-4 text-center">
-                                        <a href="#">Sales</a>
+                                        <a href="#">{{ __('dashboard.sales') }}</a>
                                     </div>
                                     <div class="col-4 text-center">
-                                        <a href="#">Friends</a>
+                                        <a href="#">{{ __('dashboard.friends') }}</a>
                                     </div>
                                 </div>
                                 <!--end::Row-->
@@ -223,7 +249,8 @@
                             <!--end::Menu Body-->
                             <!--begin::Menu Footer-->
                             <li class="user-footer">
-                                <a href="{{ route('profiley.edit') }}" class="btn btn-outline-secondary">Profile</a>
+                                <a href="{{ route('profiley.edit') }}"
+                                    class="btn btn-outline-secondary">{{ __('dashboard.profile') }}</a>
                                 <a href="#" class="btn btn-outline-danger float-end">
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -231,7 +258,7 @@
                                         <x-dropdown-link :href="route('logout')"
                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                            {{ __('Log Out') }}
+                                            {{ __('dashboard.logout') }}
                                         </x-dropdown-link>
                                     </form>
                                 </a>
@@ -275,7 +302,7 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Dashboard</h3>
+                            <h3 class="mb-0">{{ __('dashboard.dashboard') }}</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
@@ -290,14 +317,14 @@
                     <!--begin::Footer-->
                     <footer class="app-footer">
                         <!--begin::To the end-->
-                        <div class="float-end d-none d-sm-inline">Anything you want</div>
+                        <div class="float-end d-none d-sm-inline">{{ config('app.name') }}</div>
                         <!--end::To the end-->
                         <!--begin::Copyright-->
                         <strong>
                             Copyright &copy; 2014-2026&nbsp;
                             <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
                         </strong>
-                        All rights reserved.
+                        {{ __('dashboard.all_rights_reserved') }}
                         <!--end::Copyright-->
                     </footer>
                     <!--end::Footer-->

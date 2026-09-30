@@ -5,7 +5,7 @@
                   <li class="nav-item">
                       <a href="{{route($item['route'])}}" class="nav-link {{$item['route']== $active ? 'active': '' }}">
                         <i class="{{$item['icon']}}"></i>
-                        <p> {{$item['title']}} </p>
+                        <p> {{ __($item['title']) }} </p>
                       </a>
                     </li>
                   @endforeach
