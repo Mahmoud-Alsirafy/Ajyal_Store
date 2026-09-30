@@ -16,16 +16,16 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/glightbox.min.css" />
     <link rel="stylesheet" href="{{ asset('assets') }}/css/main.css" />
     @stack('styles')
+    <style>
+        .topbar .container {
+            display: block !important;
+            opacity: 1 !important;
+        }
+    </style>
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
+
 
     <div class="preloader">
         <div class="preloader-inner">
@@ -45,14 +45,17 @@
                             <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
-                                        <select id="select4">
-                                            <option value="0" selected>$ USD</option>
-                                            <option value="1">€ EURO</option>
-                                            <option value="2">$ CAD</option>
-                                            <option value="3">₹ INR</option>
-                                            <option value="4">¥ CNY</option>
-                                            <option value="5">৳ BDT</option>
-                                        </select>
+                                        <form action="{{ route('currency.store') }}" method="post">
+                                            @csrf
+                                            <select name="currency_code" onchange="this.form.submit()">
+                                                <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
+                                                <option value="EUR"@selected('EUR' == session('currency_code'))>€ EURO</option>
+                                                <option value="EGP"@selected('EGP' == session('currency_code'))>$ EGP</option>
+                                                <option value="QAR"@selected('QAR' == session('currency_code'))>₹ QAR</option>
+                                                <option value="SAR"@selected('SAR' == session('currency_code'))>¥ SAR</option>
+                                                <option value="JOD"@selected('JOD' == session('currency_code'))>৳ JOD</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </li>
                                 <li>
@@ -503,6 +506,7 @@
     <script src="{{ asset('assets') }}/js/glightbox.min.js"></script>
     <script src="{{ asset('assets') }}/js/main.js"></script>
     @stack('scripts')
+
 </body>
 
 <!-- Mirrored from demo.graygrids.com/themes/shopgrids/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Dec 2022 23:35:59 GMT -->
