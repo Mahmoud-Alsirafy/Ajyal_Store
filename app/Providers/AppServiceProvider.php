@@ -2,15 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\EmptyCart;
-use App\Events\OrderCreated;
-use App\Events\OrderPlaced;
-use App\Listeners\DecrementProductStock;
-use App\Listeners\DeleteCart;
-use App\Listeners\SendOrderCreatedNotification;
+use App\Services\CurrencyConverter;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Event;
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
             \Bezhanov\Faker\ProviderCollectionHelper::addAllProvidersTo($faker);
             return $faker;
         });
+        // $this->app->singleton(\App\Services\CurrencyConverter::class, function ($app) {
+        //     return new \App\Services\CurrencyConverter();
+        // });
+        $this->app->bind('currency.converter', fn() => new CurrencyConverter(config('services.currencyapi.key')));
     }
 
     /**

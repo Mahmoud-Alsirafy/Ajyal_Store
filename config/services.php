@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+
+    'currencyapi' => [
+        'key' => env('CURRENCYAPI_KEY', 'cur_live_j2KYiqxHrKCm9VOnSWJE9T4TZr4kX1pEXlT0SoeG'),
+    ],
 ];

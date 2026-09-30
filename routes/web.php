@@ -3,6 +3,7 @@
 use App\Http\Controllers\Front\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckOutController;
+use App\Http\Controllers\Front\CurrencyConverterController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('auth/user/2fa', [TwoFactorAuthenticationController::class, 'index'])->name('user/2fa');
+
+Route::post('currency', [CurrencyConverterController::class, 'store'])->name('currency.store');
 // require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';
