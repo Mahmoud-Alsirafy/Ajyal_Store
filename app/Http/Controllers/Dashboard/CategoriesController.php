@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use App\Rules\Filter;
+use App\Traits\UploadLogoImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
-use App\Traits\UploadLogoImage;
 
 class CategoriesController extends Controller
 {
@@ -19,6 +20,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('category.view')) {
+            abort(403);
+        }
         $request = request();
 
 
@@ -42,6 +46,9 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('category.create')) {
+            abort(403);
+        }
         $Parents = Categorie::all();
         return view('Dashboard.Categories.create', compact('Parents'));
     }
@@ -51,6 +58,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('category.create');
         $request->validate([
             'name' => ['required', 'string', 'max:100', 'unique:categories,name', new Filter(['laravel', 'php', 'admin'])],
             'parent_id' => 'nullable|int|exists:categories,id',
@@ -82,6 +90,9 @@ class CategoriesController extends Controller
      */
     public function show(Categorie $category)
     {
+        if (Gate::denies('category.view')) {
+            abort(403);
+        }
         // return $category;
 
         return view('Dashboard.Categories.show', [
@@ -94,6 +105,7 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('category.update');
         $categorie = Categorie::findOrFail($id);
         $Parents = Categorie::where('id', '<>', $id)->where(
             function ($query) use ($id) {
@@ -109,6 +121,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
+        Gate::authorize('category.update');
         $old_image = $categorie->logo_image;
         $cover_images = $categorie->cover_images;
         $data = $request->except('logo_image', 'cover_images');
@@ -149,6 +162,9 @@ class CategoriesController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
+        if (Gate::denies('category.delete')) {
+            abort(403);
+        }
         DB::beginTransaction();
         try {
             $categorie->delete();

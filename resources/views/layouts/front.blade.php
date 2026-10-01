@@ -60,14 +60,14 @@
                                 </li>
                                 <li>
                                     <div class="select-position">
-                                        <select id="select5">
-                                            <option value="0" selected>English</option>
-                                            <option value="1">Español</option>
-                                            <option value="2">Filipino</option>
-                                            <option value="3">Français</option>
-                                            <option value="4">العربية</option>
-                                            <option value="5">हिन्दी</option>
-                                            <option value="6">বাংলা</option>
+                                        <select onchange="window.location.href = this.value">
+                                            @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <option
+                                                    value="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                                                    @selected(app()->getLocale() === $localeCode)>
+                                                    {{ $properties['native'] }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </li>

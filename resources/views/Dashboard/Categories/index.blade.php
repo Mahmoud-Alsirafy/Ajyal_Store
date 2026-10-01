@@ -12,7 +12,9 @@
 <x-alert />
 
 <div class="mb-5">
-    <a href="{{ route('Categories.create') }}" class="btn btn-ms btn-outline-primary">{{ __('Create') }}</a>
+    @if (Auth::user()->can('category.create'))
+        <a href="{{ route('Categories.create') }}" class="btn btn-ms btn-outline-primary">{{ __('Create') }}</a>
+    @endif
     <a href="{{ route('Categories.trashed') }}" class="btn btn-ms btn-outline-info">{{ __('Trash') }}</a>
 </div>
 
@@ -71,15 +73,20 @@
                     <td>{{ $Categorie->status }}</td>
                     <td>{{ $Categorie->created_at->format('d M, Y') }}</td>
                     <td>{{ $Categorie->updated_at->format('d M, Y') }}</td>
-                    <td><a
-                            href="{{ route('Categories.edit', $Categorie->id) }}"class="btn btn-sm btn-outline-success">{{ __('Edit') }}</a>
+                    <td>
+                        @can('category.update')
+                            <a
+                                href="{{ route('Categories.edit', $Categorie->id) }}"class="btn btn-sm btn-outline-success">{{ __('Edit') }}</a>
+                        @endcan
                     </td>
                     <td>
-                        <form action="{{ route('Categories.destroy', $Categorie->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-sm btn-outline-danger">{{ __('Delete') }}</button>
-                        </form>
+                        @can('category.delete')
+                            <form action="{{ route('Categories.destroy', $Categorie->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">{{ __('Delete') }}</button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
