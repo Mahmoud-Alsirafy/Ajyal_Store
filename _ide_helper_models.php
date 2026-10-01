@@ -25,7 +25,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \App\Models\Profile $profile
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Database\Factories\AdminFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin query()
@@ -214,6 +216,7 @@ namespace App\Models{
  * @property string $name
  * @property string $slug
  * @property string|null $description
+ * @property string $image
  * @property numeric $price
  * @property numeric|null $compare_price
  * @property int $quantity
@@ -233,6 +236,7 @@ namespace App\Models{
  * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product active()
  * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Product filter($filters)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product onlyTrashed()
@@ -244,6 +248,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereFeatured($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereOptions($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product wherePrice($value)
@@ -296,6 +301,44 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereUserId($value)
  */
 	class Profile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
+ */
+	class Role extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $role_id
+ * @property string $ability
+ * @property string $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility whereAbility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RoleAbility whereUpdatedAt($value)
+ */
+	class RoleAbility extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -370,6 +413,8 @@ namespace App\Models{
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \App\Models\Profile $profile
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
