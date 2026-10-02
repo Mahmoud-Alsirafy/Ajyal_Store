@@ -20,9 +20,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('category.view', fn($user) => true);
-        Gate::define('category.create', fn($user) => true);
-        Gate::define('category.update', fn($user) => false);
-        Gate::define('category.delete', fn($user) => false);
+        foreach (config('abilities') as $ability_code => $ability_name) {
+            Gate::define($ability_code, function ($user) use ($ability_code) {
+                return $user->hasAbility($ability_code);
+            });
+        }
     }
 }
