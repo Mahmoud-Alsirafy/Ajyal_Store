@@ -20,7 +20,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        if (Gate::denies('category.view')) {
+        if (Gate::denies('categories.view')) {
             abort(403);
         }
         $request = request();
@@ -46,7 +46,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        if (Gate::denies('category.create')) {
+        if (Gate::denies('categories.create')) {
             abort(403);
         }
         $Parents = Categorie::all();
@@ -58,7 +58,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('category.create');
+        Gate::authorize('categories.create');
         $request->validate([
             'name' => ['required', 'string', 'max:100', 'unique:categories,name', new Filter(['laravel', 'php', 'admin'])],
             'parent_id' => 'nullable|int|exists:categories,id',
@@ -90,7 +90,7 @@ class CategoriesController extends Controller
      */
     public function show(Categorie $category)
     {
-        if (Gate::denies('category.view')) {
+        if (Gate::denies('categories.view')) {
             abort(403);
         }
         // return $category;
@@ -105,7 +105,7 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        Gate::authorize('category.update');
+        Gate::authorize('categories.update');
         $categorie = Categorie::findOrFail($id);
         $Parents = Categorie::where('id', '<>', $id)->where(
             function ($query) use ($id) {
@@ -121,7 +121,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        Gate::authorize('category.update');
+        Gate::authorize('categories.update');
         $old_image = $categorie->logo_image;
         $cover_images = $categorie->cover_images;
         $data = $request->except('logo_image', 'cover_images');
@@ -162,7 +162,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        if (Gate::denies('category.delete')) {
+        if (Gate::denies('categories.delete')) {
             abort(403);
         }
         DB::beginTransaction();
