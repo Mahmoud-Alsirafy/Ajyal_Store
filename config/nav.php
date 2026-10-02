@@ -15,12 +15,12 @@ return [
         'icon' => 'nav-icon bi bi-circle',
         'route' => 'products.index',
         'title' => 'products',
-        'ability' => 'product.view',
+        'ability' => 'products.view',
     ],
     [
         'icon' => 'nav-icon bi bi-shield',
         'route' => 'Roles.index',
         'title' => 'Roles',
-        // 'ability' => 'role.view',
+        'ability' => 'roles.view',
     ]
 ];

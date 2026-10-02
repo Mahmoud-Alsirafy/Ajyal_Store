@@ -15,4 +15,9 @@ return
         'products.delete' => 'Delete Products',
         'products.restore' => 'Restore Products',
         'products.forceDelete' => 'Force Delete Products',
+
+        'roles.view' => 'View Roles',
+        'roles.create' => 'Create Roles',
+        'roles.update' => 'Update Roles',
+        'roles.delete' => 'Delete Roles',
     ];
