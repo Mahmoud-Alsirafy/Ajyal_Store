@@ -14,8 +14,8 @@ class Roles extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(10);
-        return view('dashboard.roles.index', compact('roles'));
+        $Roles = Role::paginate(10);
+        return view('dashboard.roles.index', compact('Roles'));
     }
 
     /**
@@ -39,7 +39,7 @@ class Roles extends Controller
         ]);
         $role = Role::createWithAbilities($request);
 
-        return redirect()->route('dashboard.roles.index')->with('success', 'role Created Successfully');
+        return redirect()->route('Roles.index')->with('success', 'role Created Successfully');
     }
 
     /**
@@ -53,23 +53,24 @@ class Roles extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function edit(Role $Role)
     {
-        return view('dashboard.roles.edit', compact('role'));
+        $role_abilities = $Role->abilities->pluck('type', 'ability')->toArray();
+        return view('dashboard.Roles.edit', compact('Role', 'role_abilities'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Role $Role)
     {
 
         $request->validate([
             'name' => 'required|string|max:255',
             'abilities' => 'required|array',
         ]);
-        $role->updateWithAbilities($request, $role);
-        return redirect()->route('dashboard.roles.index')->with('success', 'role Updated Successfully');
+        $Role->updateWithAbilities($request, $Role);
+        return redirect()->route('Roles.index')->with('success', 'role Updated Successfully');
     }
 
     /**
@@ -78,6 +79,6 @@ class Roles extends Controller
     public function destroy(string $id)
     {
         Role::destroy($id);
-        return redirect()->route('dashboard.roles.index')->with('success', 'role Deleted Successfully');
+        return redirect()->route('dashboard.Roles.index')->with('success', 'role Deleted Successfully');
     }
 }

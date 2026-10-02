@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\Roles;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 // // ['auth', 'verified']
 
 Route::group([
-    'middleware' => ['auth:admin'],
+    'middleware' => ['auth:admin , web'],
     'prefix' => 'admin',
 ], function () {
 
@@ -46,4 +47,14 @@ Route::group([
     Route::get('/products/{product}', [\App\Http\Controllers\Dashboard\ProductController::class, 'update'])->name('products.update');
     Route::get('/profile', [\App\Http\Controllers\Dashboard\ProfileController::class, 'edit'])->name('profiley.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profiley.update');
+
+
+    Route::resource('/Roles', Roles::class)->names([
+        'index' => 'Roles.index',
+        'create' => 'Roles.create',
+        'store' => 'Roles.store',
+        'edit' => 'Roles.edit',
+        'update' => 'Roles.update',
+        'destroy' => 'Roles.destroy',
+    ]);
 });
