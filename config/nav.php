@@ -9,12 +9,18 @@ return [
         'icon' => 'nav-icon bi bi-circle',
         'route' => 'Categories.index',
         'title' => 'Categories',
-        'ability' => 'category.view',
+        'ability' => 'categories.view',
     ],
     [
         'icon' => 'nav-icon bi bi-circle',
         'route' => 'products.index',
         'title' => 'products',
         'ability' => 'product.view',
+    ],
+    [
+        'icon' => 'nav-icon bi bi-shield',
+        'route' => 'Roles.index',
+        'title' => 'Roles',
+        // 'ability' => 'role.view',
     ]
 ];
