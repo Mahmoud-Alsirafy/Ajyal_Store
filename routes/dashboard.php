@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 // // ['auth', 'verified']
 
 Route::group([
-    'middleware' => ['auth:admin , web'],
+    'middleware' => ['auth:admin,web'],
     'prefix' => 'admin',
 ], function () {
 
