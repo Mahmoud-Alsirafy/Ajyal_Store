@@ -23,7 +23,6 @@
 
             <th>{{ __('ID') }}</th>
             <th>{{ __('Name') }}</th>
-            <th>{{ __('Abilities') }}</th>
             <th>{{ __('Created_at') }}</th>
             <th>{{ __('Edit') }}</th>
         </tr>
