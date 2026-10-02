@@ -26,20 +26,6 @@
                 <tr>
                     {{-- <td>{{ $key + 1 }}</td> --}}
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->status }}</td>
-                    <td>
-                        @if ($product->logo_image)
-                            <img src=" {{ $product->logo_image }}" height="100px" width="100px" />
-                        @endif
-                    </td>
-                    <td>
-                        @if ($Categorie->cover_images)
-                            @foreach (explode(',', $Categorie->cover_images) as $image)
-                                <img src="{{ asset('storage/uploads/' . $image) }}" height="50px" width="50px"
-                                    style="margin:2px;" />
-                            @endforeach
-                        @endif
-                    </td>
                     <td>{{ $product->created_at->format('d M, Y') }}</td>
                 </tr>
             @endforeach
