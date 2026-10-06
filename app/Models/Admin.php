@@ -12,5 +12,30 @@ use Laravel\Sanctum\HasApiTokens;
 class Admin extends User
 {
     use HasFactory, Notifiable, TwoFactorAuthenticatable, HasApiTokens, HasRoles;
-    protected $guarded = [];
+
+    protected $fillable = [
+        'name',
+        'email',
+        'username',
+        'password',
+        'phone_number',
+        'super_admin',
+        'status',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+            'super_admin' => 'boolean',
+        ];
+    }
 }

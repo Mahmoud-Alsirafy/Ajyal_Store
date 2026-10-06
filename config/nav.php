@@ -22,5 +22,11 @@ return [
         'route' => 'Roles.index',
         'title' => 'Roles',
         'ability' => 'roles.view',
+    ],
+    [
+        'icon' => 'nav-icon bi bi-shield',
+        'route' => 'admins.index',
+        'title' => 'Admins',
+        'ability' => 'admins.view',
     ]
 ];

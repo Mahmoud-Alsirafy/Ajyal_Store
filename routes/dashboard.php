@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
@@ -56,5 +57,14 @@ Route::group([
         'edit' => 'Roles.edit',
         'update' => 'Roles.update',
         'destroy' => 'Roles.destroy',
+    ]);
+
+    Route::resource('admins', AdminController::class)->names([
+        'index' => 'admins.index',
+        'create' => 'admins.create',
+        'store' => 'admins.store',
+        'edit' => 'admins.edit',
+        'update' => 'admins.update',
+        'destroy' => 'admins.destroy',
     ]);
 });

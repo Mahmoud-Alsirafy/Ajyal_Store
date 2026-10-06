@@ -20,6 +20,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::before(function ($user, $ability) {
+            if ($user->super_admin) {
+                return true;
+            }
+            return false;
+        });
         foreach (config('abilities') as $ability_code => $ability_name) {
             Gate::define($ability_code, function ($user) use ($ability_code) {
                 return $user->hasAbility($ability_code);
