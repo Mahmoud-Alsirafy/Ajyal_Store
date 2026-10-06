@@ -41,7 +41,7 @@ Route::group([
         'index' => 'products.index',
         'create' => 'products.create',
         'store' => 'products.store',
-        'edit' => 'products.edit',
+        'edit' => 'product.edit',
         'update' => 'products.update',
         'destroy' => 'products.destroy',
     ]);
