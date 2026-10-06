@@ -1,10 +1,15 @@
-<div>
-@section('content')
+@props([
+    'type' => null,
+])
 
-@if(session()->has('success'))
+@if (session()->has('success') && (!$type || $type === 'success'))
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
-@if(session()->has('danger'))
-    <div class="alert alert-danger">{{ session('danger') }}</div>
+
+@if (session()->has('error') && (!$type || $type === 'error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
-</div>
+
+@if (session()->has('info') && (!$type || $type === 'info'))
+    <div class="alert alert-info">{{ session('info') }}</div>
+@endif
