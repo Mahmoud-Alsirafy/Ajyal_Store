@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class Roles extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class, 'Role');
+    }
     /**
      * Display a listing of the resource.
      */

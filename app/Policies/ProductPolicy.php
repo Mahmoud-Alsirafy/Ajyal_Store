@@ -6,13 +6,7 @@ use App\Models\Product;
 
 class ProductPolicy
 {
-    public function before($user, $ability)
-    {
-        if ($user->super_admin) {
-            return true;
-        }
-        return false;
-    }
+
     /**
      * Determine whether the user can view any models.
      */
@@ -42,7 +36,7 @@ class ProductPolicy
      */
     public function update($user, Product $product): bool
     {
-        return $user->hasAbility('products.update');
+        return $user->hasAbility('products.update'); //&& $product->store_id == $user->store_id;
     }
 
     /**
