@@ -252,12 +252,11 @@
                                 <a href="{{ route('profiley.edit') }}"
                                     class="btn btn-outline-secondary">{{ __('dashboard.profile') }}</a>
                                 <a href="#" class="btn btn-outline-danger float-end">
-                                    <form method="POST" action="{{ route('logout') }}">
+                                    <form method="POST"
+                                        action="{{ Auth::guard('admin')->check() ? url('admin/logout') : route('logout') }}">
                                         @csrf
-
-                                        <x-dropdown-link :href="route('logout')"
-                                            onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                        <x-dropdown-link href="#"
+                                            onclick="event.preventDefault(); this.closest('form').submit();">
                                             {{ __('dashboard.logout') }}
                                         </x-dropdown-link>
                                     </form>
