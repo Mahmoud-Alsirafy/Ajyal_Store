@@ -12,6 +12,10 @@ use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Admin::class, 'admin');
+    }
     /**
      * Display a listing of the resource.
      */

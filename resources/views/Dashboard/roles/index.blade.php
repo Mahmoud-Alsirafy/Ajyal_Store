@@ -12,9 +12,9 @@
     <x-alert />
 
     <div class="mb-5">
-        {{-- @if (Auth::user()->can('roles.create')) --}}
-        <a href="{{ route('Roles.create') }}" class="btn btn-ms btn-outline-primary">{{ __('Create') }}</a>
-        {{-- @endif --}}
+        @can('create', 'App\Models\Role')
+            <a href="{{ route('Roles.create') }}" class="btn btn-ms btn-outline-primary">{{ __('Create') }}</a>
+        @endcan
     </div>
 
     <table class="table">
