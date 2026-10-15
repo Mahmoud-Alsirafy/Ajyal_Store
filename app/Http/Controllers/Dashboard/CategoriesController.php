@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Categorie::class, 'category');
+    }
     use UploadLogoImage;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if (Gate::denies('categories.view')) {
-            abort(403);
-        }
+
         $request = request();
 
 
@@ -46,9 +48,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        if (Gate::denies('categories.create')) {
-            abort(403);
-        }
+
         $Parents = Categorie::all();
         return view('Dashboard.Categories.create', compact('Parents'));
     }
@@ -58,7 +58,6 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('categories.create');
         $request->validate([
             'name' => ['required', 'string', 'max:100', 'unique:categories,name', new Filter(['laravel', 'php', 'admin'])],
             'parent_id' => 'nullable|int|exists:categories,id',
@@ -90,11 +89,6 @@ class CategoriesController extends Controller
      */
     public function show(Categorie $category)
     {
-        if (Gate::denies('categories.view')) {
-            abort(403);
-        }
-        // return $category;
-
         return view('Dashboard.Categories.show', [
             'categorie' => $category,
         ]);
@@ -105,7 +99,6 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        Gate::authorize('categories.update');
         $categorie = Categorie::findOrFail($id);
         $Parents = Categorie::where('id', '<>', $id)->where(
             function ($query) use ($id) {
@@ -121,7 +114,6 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        Gate::authorize('categories.update');
         $old_image = $categorie->logo_image;
         $cover_images = $categorie->cover_images;
         $data = $request->except('logo_image', 'cover_images');
@@ -160,20 +152,19 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $category)
     {
-        if (Gate::denies('categories.delete')) {
-            abort(403);
-        }
         DB::beginTransaction();
         try {
-            $categorie->delete();
+            $category->delete();
             DB::commit();
+
             return Redirect::route('Categories.index')
                 ->with('danger', 'Category Deleted');
         } catch (\Throwable $e) {
             DB::rollBack();
-            return Redirect::back()->withErrors($e->getMessage());
+
+            return Redirect::back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
