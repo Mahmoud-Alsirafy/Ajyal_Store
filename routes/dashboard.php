@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\ImportProductsController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\Roles;
@@ -36,6 +37,9 @@ Route::group([
     ]);
     Route::get('/categories/{category}', [\App\Http\Controllers\Dashboard\CategoriesController::class, 'show'])->name('Categories.show');
 
+
+    Route::get('product/import', [ImportProductsController::class, 'create'])->name('products.import');
+    Route::post('product/import', [ImportProductsController::class, 'store'])->name('products.import');
 
     Route::resource('/products', ProductController::class)->names([
         'index' => 'products.index',

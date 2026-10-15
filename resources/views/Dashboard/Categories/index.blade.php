@@ -10,9 +10,12 @@
 
 @section('content')
     <x-alert />
+    @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
 
     <div class="mb-5">
-        @can('category.create')
+        @can('create', 'App\Models\Categorie')
             <a href="{{ route('Categories.create') }}" class="btn btn-ms btn-outline-primary">{{ __('Create') }}</a>
         @endcan
         <a href="{{ route('Categories.trashed') }}" class="btn btn-ms btn-outline-info">{{ __('Trash') }}</a>
@@ -76,13 +79,13 @@
                     <td>{{ $Categorie->created_at->format('d M, Y') }}</td>
                     <td>{{ $Categorie->updated_at->format('d M, Y') }}</td>
                     <td>
-                        @can('category.update')
+                        @can('update', $Categorie)
                             <a href="{{ route('Categories.edit', $Categorie->id) }}"
                                 class="btn btn-sm btn-outline-success">{{ __('Edit') }}</a>
                         @endcan
                     </td>
                     <td>
-                        @can('category.delete')
+                        @can('delete', $Categorie)
                             <form action="{{ route('Categories.destroy', $Categorie->id) }}" method="post">
                                 @csrf
                                 @method('delete')
