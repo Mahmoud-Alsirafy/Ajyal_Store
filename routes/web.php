@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialLogincontroller;
 use App\Http\Controllers\Front\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckOutController;
 use App\Http\Controllers\Front\CurrencyConverterController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -18,7 +20,7 @@ Route::group([
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 ], function () {
 
-    Route::get('/', [HomeController::class, 'index'])->middleware('auth.type:admin,super admin')->name('home');
+    Route::get('/', [HomeController::class, 'index'])->middleware('auth.type:user,admin,super admin')->name('home');
 
     Route::get('/products', [\App\Http\Controllers\Front\ProductController::class, 'index'])->name('products.edit');
     Route::get('/products/{product:slug}', [\App\Http\Controllers\Front\ProductController::class, 'show'])->name('products.show');
@@ -46,3 +48,7 @@ Route::group([
     // require __DIR__ . '/auth.php';
     require __DIR__ . '/dashboard.php';
 });
+
+Route::get('/auth/{provider}/redirect', [SocialLogincontroller::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/{provider}/callback', [SocialLogincontroller::class, 'callback'])->name('google.callback');
+Route::get('/auth/{provider}/user', [SocialController::class, 'index']);

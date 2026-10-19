@@ -39,4 +39,11 @@ return [
     'currencyapi' => [
         'key' => env('CURRENCYAPI_KEY', 'cur_live_j2KYiqxHrKCm9VOnSWJE9T4TZr4kX1pEXlT0SoeG'),
     ],
+
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
+    ]
 ];

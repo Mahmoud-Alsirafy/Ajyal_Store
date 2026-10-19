@@ -29,7 +29,7 @@
                                             login</a>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-12">
-                                        <a class="btn google-btn" href="javascript:void(0)"><i
+                                        <a class="btn google-btn" href="{{ route('google.redirect', 'google') }}"><i
                                                 class="lni lni-google"></i> Google login</a>
                                     </div>
                                 </div>
